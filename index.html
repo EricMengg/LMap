@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>L Map</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="main.js"></script>
+    <script src="direc.js"></script>
+
+    <style>
+        #bottom {
+            overflow: hidden;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        #top {
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    </style>
+    
+</head>
+<body>
+    <div data-role="page" id="main">  
+
+        <div id="main-map" style="height: 550px;"></div>
+        
+        <div data-role="content" class="ui-bar-c ui-corner-all ui-shadow" style="margin-bottom: 100px;">
+
+            <div data-role="navbar">
+                <ul>
+                       <li> <a href="#direction" data-icon="location">Direction</a>
+                       <li> <a href="" data-icon="plus">Save</a>
+                       <li> <a href="#nearby" data-icon="shop">Nearby</a>
+                </ul>
+            </div>
+
+        </div><!-- /content -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a>
+                 <li> <a href="#help" data-icon="info">Help Center</a>
+            </ul>
+            </div>
+            <h4>Lingpengkun Developing User Interfaces </h4>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="direction">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Direction</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+
+        <div id="direc-map" style="height: 550px; margin-top: 44px; margin-bottom: 100px;"></div>
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a>
+                 <li> <a href="#help" data-icon="info">Help Center</a>
+            </ul>
+            </div>
+            <h4>Lingpengkun Developing User Interfaces </h4>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="nearby">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Nearby</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+        
+        <div data-role="content" style="margin-bottom: 100px;">
+            <div data-role="navbar">
+                <ul>
+                    <li> <a href="" style="height: 100px;">Restaurant</a>
+                    <li> <a href="" style="height: 100px;">Store</a>
+                    <li> <a href="" style="height: 100px;">Hotel</a>
+                </ul>
+
+                <ul>
+                    <li> <a href="" style="height: 100px;">Parking Lot</a>
+                    <li> <a href="" style="height: 100px;">Gym</a>
+                    <li> <a href="" style="height: 100px;">Park</a>
+                </ul>
+            </div>
+         
+        </div><!-- /content -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a>
+                 <li> <a href="#help" data-icon="info">Help Center</a>
+            </ul>
+            </div>
+            <h4>Lingpengkun Developing User Interfaces </h4>
+        </div>
+    </div><!-- /page -->
+
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASBuIswDy-IFbiDORxCpit-lUQqcAZVqM"></script>
+
+</body>
+</html>
