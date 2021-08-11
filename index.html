@@ -11,6 +11,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="main.js"></script>
     <script src="direc.js"></script>
+    <script src="history.js"></script>
+    <script src="saved.js"></script>
 
     <style>
         #bottom {
@@ -26,17 +28,133 @@
             width: 100%;
             z-index: 100;
         }
+        #nearby1{
+            background-image: url(Eat.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+        }
+        #nearby2{
+            background-image: url(Shop.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+        }
+        #nearby3{
+            background-image: url(Hotel.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+        }
+        #nearby4{
+            background-image: url(Parking.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+        }
+        #nearby5{
+            background-image: url(Gym.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+        }
+        #nearby6{
+            background-image: url(Park.png);
+            background-repeat: no-repeat;
+            background-size: 30vw 30vw;
+            height: 25vw;
+            background-position: center;
+            text-align: center;
+            background-color: lightgray;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-size: 100%;
+            text-align: center;
+        }
+
+        #lgButton {
+            background-image: url(login.png);
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+            height: 40px;
+            width: 40px;
+            text-shadow: 2px 2px 4px #000000;
+            color: white;
+            position: absolute; 
+            z-index: 9;
+            top: 9px;
+            right: 60px;
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+
+        #mode-selector {
+            position: absolute; 
+            z-index: 9; 
+            bottom: 88px; 
+            left: 145px;
+            color: #fff;
+            width: calc(100% - 200px);
+        }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #disable {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
     </style>
     
 </head>
 <body>
     <div data-role="page" id="main">  
 
-        <div id="main-map" style="height: 80vh;"></div>
-        
-        <div data-role="content" class="ui-bar-c ui-corner-all ui-shadow" style="margin-bottom: 100px;">
+        <a href="#login" id="lgButton"></a>
 
-        </div><!-- /content -->
+        <div style="position: absolute; z-index: 9; bottom: 140px; left: 5px;">
+        <input id="search" type="text" placeholder="Search Box">
+        </div>
+        
+        <div id="main-map" style="height: calc(100vh - 112px);"></div>
 
         <div data-role="footer"  id="bottom">
             <div data-role="navbar">
@@ -64,7 +182,31 @@
 
         </div><!-- /header -->
 
-        <div id="direc-map" style="height: 80vh; margin-top: 44px; margin-bottom: 100px;"></div>
+        <div style="position: absolute; z-index: 9; bottom: 112px; left: 5px; width: 132px;">
+            <input id="search" type="text" placeholder="Origin">
+        </div>
+        <div style="position: absolute; z-index: 9; bottom: 74px; left: 5px; width: 132px;">
+            <input id="search" type="text" placeholder="Destination">
+        </div>
+        <div id="mode-selector" class="controls">
+            
+            <div style="width: 90px; display: inline-block; height: 20px;">
+            <input type="radio" name="type" id="changemode-walking" checked="checked"/>
+            <label for="changemode-walking" style="font-size:12px">Walking</label>
+            </div>
+
+            <div style="width: 90px; display: inline-block; height: 20px;">
+            <input type="radio" name="type" id="changemode-transit"/>
+            <label for="changemode-transit" style="font-size:12px">Transit</label>
+            </div>
+
+            <div style="width: 90px; height: 20px;">
+            <input type="radio" name="type" id="changemode-driving"/>
+            <label for="changemode-driving" style="font-size:12px">Driving</label>
+            </div>
+          </div>
+
+        <div id="direc-map" style="height: calc(100vh - 100px); margin-top: 44px;"></div>
 
         <div data-role="footer"  id="bottom">
             <div data-role="navbar">
@@ -86,18 +228,18 @@
 
         </div><!-- /header -->
         
-        <div data-role="content" style="margin-bottom: 100px;">
+        <div data-role="content" style="margin-top: 44px; margin-bottom: 100px;">
             <div data-role="navbar">
                 <ul>
-                    <li> <a href="" style="height: 100px;">Restaurant</a></li>
-                    <li> <a href="" style="height: 100px;">Store</a></li>
-                    <li> <a href="" style="height: 100px;">Hotel</a></li>
+                    <li> <a href="" id="nearby1">Restaurant</a></li>
+                    <li> <a href="" id="nearby2">Store</a></li>
+                    <li> <a href="" id="nearby3">Hotel</a></li>
                 </ul>
 
                 <ul>
-                    <li> <a href="" style="height: 100px;">Parking Lot</a></li>
-                    <li> <a href="" style="height: 100px;">Gym</a></li>
-                    <li> <a href="" style="height: 100px;">Park</a></li>
+                    <li> <a href="" id="nearby4">Parking Lot</a></li>
+                    <li> <a href="" id="nearby5">Gym</a></li>
+                    <li> <a href="" id="nearby6">Park</a></li>
                 </ul>
             </div>
          
@@ -113,6 +255,181 @@
             </div>
         </div>
     </div><!-- /page -->
+
+    <div data-role="page" id="login">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Log in</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+        
+        <div data-role="content" style="margin-top: 44px; margin-bottom: 100px;">
+            <div data-role="navbar">
+                <ul>
+                     <li> <a id="disable">Log in</a></li>
+                     <li> <a href="#signup">Sign up</a></li>
+                </ul>
+            </div>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+                
+            <button style="background-color: rgb(72, 135, 251);">Log in</button>
+
+            <a href="#reset" style="color:red;">Forget Password?</a>
+        </div><!-- /content -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="signup">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Sign up</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+        
+        <div data-role="content" style="margin-top: 44px; margin-bottom: 100px;">
+            <div data-role="navbar">
+                <ul>
+                     <li> <a href="#login">Log in</a></li>
+                     <li> <a id="disable">Sign up</a></li>
+                </ul>
+            </div>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            
+            <label for="repsw"><b>Re-enter Password</b></label>
+            <input type="password" placeholder="Enter Password" name="repsw" required>
+                
+            <button style="background-color: rgb(72, 135, 251);">Sign up</button>
+
+        </div><!-- /content -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="reset">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Password Reset</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+        
+        <div data-role="content" style="margin-top: 44px; margin-bottom: 100px;">
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            
+            <label for="repsw"><b>Re-enter Password</b></label>
+            <input type="password" placeholder="Enter Password" name="repsw" required>
+                
+            <button style="background-color: rgb(72, 135, 251);">Submit</button>
+
+        </div><!-- /content -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="history">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Search History</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+
+        <div id="hisMap" style="height: calc(100vh - 100px); margin-top: 44px;"></div>
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="saved">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Saved Places</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+
+        <div id="savedMap" style="height: calc(100vh - 100px); margin-top: 44px;"></div>
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
+    <div data-role="page" id="help">
+
+        <div data-role="header" id="top">
+            <a data-icon="back" data-rel= "back" back-btn="true">Back</a>
+            <h1>Help Center</h1>
+            <a href="#main" data-icon="home">Home</a>
+
+        </div><!-- /header -->
+
+        <div data-role="footer"  id="bottom">
+            <div data-role="navbar">
+            <ul>
+                 <li> <a href="#history" data-icon="clock">History</a></li>
+                 <li> <a href="#saved" data-icon="star">Saved Places</a></li>
+                 <li> <a href="#help" data-icon="info">Help Center</a></li>
+            </ul>
+            </div>
+        </div>
+    </div><!-- /page -->
+
 
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASBuIswDy-IFbiDORxCpit-lUQqcAZVqM"></script>
