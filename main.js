@@ -23,11 +23,60 @@ function initializeMain() {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             };
-            //geoMarker.setPosition(pos);
+            geoMarker.setPosition(pos);
             mainMap.setCenter(pos);
         }
         );
     }
+
+    let input = document.getElementById("search-input");
+    let searchBox = new google.maps.places.SearchBox(input);
+    let markers = [];
+
+    searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces()
+
+        if (places.length == 0) {
+        return;
+        }
+
+        markers.forEach((marker) => {
+        marker.setMap(null);
+        });
+        markers = [];
+
+        const bounds = new google.maps.LatLngBounds();
+        places.forEach((place) => {
+        if (!place.geometry || !place.geometry.location) {
+            console.log("Returned place contains no geometry");
+            return;
+        }
+        const icon = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+        };
+
+        markers.push(
+            new google.maps.Marker({
+            mainMap,
+            icon,
+            title: place.name,
+            position: place.geometry.location,
+            })
+        );
+
+        if (place.geometry.viewport) {
+
+            bounds.union(place.geometry.viewport);
+        } else {
+            bounds.extend(place.geometry.location);
+        }
+        });
+        mainMap.fitBounds(bounds);
+    });
 }
 
 $(document).on("pageinit", "#main", function() {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASBuIswDy-IFbiDORxCpit-lUQqcAZVqM&libraries=places"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -150,8 +151,8 @@
 
         <a href="#login" id="lgButton"></a>
 
-        <div style="position: absolute; z-index: 9; bottom: 140px; left: 5px;">
-        <input id="search" type="text" placeholder="Search Box">
+        <div style="position: absolute; z-index: 9; bottom: 160px; right: 80px; left: 5px;">
+        <input id="search-input" type="text" placeholder="Search Box"/>
         </div>
         
         <div id="main-map" style="height: calc(100vh - 112px);"></div>
@@ -429,10 +430,5 @@
             </div>
         </div>
     </div><!-- /page -->
-
-
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASBuIswDy-IFbiDORxCpit-lUQqcAZVqM"></script>
-
 </body>
 </html>
